@@ -519,36 +519,41 @@
             }
         }
 
-        // Back to Top Logic
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
+        function initializeUI() {
+            // Fetch FastDL files
+            fetchFiles();
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Download All Logic
-        document.getElementById('downloadAllBtn').addEventListener('click', () => {
-            const links = document.querySelectorAll('.file-link');
-            if(links.length === 0) return;
-            
-            let delay = 0;
-            links.forEach(link => {
-                setTimeout(() => {
-                    link.click();
-                }, delay);
-                delay += 500; // stagger downloads by 500ms
+            // Back to Top Logic
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
             });
-        });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Download All Logic
+            document.getElementById('downloadAllBtn').addEventListener('click', () => {
+                const links = document.querySelectorAll('.file-link');
+                if(links.length === 0) return;
+                
+                let delay = 0;
+                links.forEach(link => {
+                    setTimeout(() => {
+                        link.click();
+                    }, delay);
+                    delay += 500; // stagger downloads by 500ms
+                });
+            });
+        }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', fetchFiles);
+        document.addEventListener('DOMContentLoaded', initializeUI);
     </script>
 
     <!-- Back to Top Button -->
