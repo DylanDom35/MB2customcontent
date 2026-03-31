@@ -463,8 +463,13 @@
             const fileList = document.getElementById('file-list');
             const syncStatus = document.getElementById('sync-status');
             
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 6000); // 6 second timeout
+            
             try {
-                const response = await fetch(API_URL);
+                const response = await fetch(API_URL, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                
                 if (!response.ok) {
                     throw new Error(response.status === 403 ? 'GitHub API Rate Limit' : 'Fetch Failed');
                 }
@@ -485,6 +490,9 @@
                 loader.style.display = 'none';
                 fileList.style.display = 'grid';
                 
+                const isTimeout = error.name === 'AbortError';
+                const errorMessage = isTimeout ? 'Connection Timed Out' : error.message;
+                
                 const cachedData = localStorage.getItem('mb2_cached_files');
                 const lastSync = localStorage.getItem('mb2_last_sync');
                 
@@ -497,7 +505,7 @@
                     warningLi.style.background = 'rgba(243, 156, 18, 0.1)';
                     warningLi.style.borderColor = 'rgba(243, 156, 18, 0.3)';
                     warningLi.style.color = 'var(--primary)';
-                    warningLi.innerHTML = `⚠️ Live sync failed. Showing cached files from <strong>${lastSync}</strong>.`;
+                    warningLi.innerHTML = `⚠️ Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
                     fileList.appendChild(warningLi);
                     
                     renderFiles(files);
@@ -505,7 +513,7 @@
                     fileList.innerHTML = `<li class="error-message">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; display: inline-block;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                         <br>
-                        Error: ${error.message}. <br>If you refreshed many times, you may have hit the GitHub rate limit. Please try again later.
+                        Error: ${errorMessage}. <br>If you refreshed many times, you may have hit the GitHub rate limit. Please try again later.
                     </li>`;
                 }
             }
