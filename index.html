@@ -351,7 +351,7 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     DOWNLOAD ALL
                 </button>
-                <span style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
+                <span id="sync-status" style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
             </div>
         </div>
         
@@ -431,57 +431,83 @@
             return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
         }
 
+        function renderFiles(files) {
+            const fileList = document.getElementById('file-list');
+            
+            if (files.length === 0) {
+                fileList.innerHTML += `<li class="error-message">No custom assets found in the ${FOLDER_PATH} directory.</li>`;
+                return;
+            }
+
+            files.forEach(file => {
+                const downloadUrl = `${FOLDER_PATH}/${file.name}`;
+                const li = document.createElement('li');
+                li.className = 'file-card';
+                li.innerHTML = `
+                    <a href="${downloadUrl}" class="file-link" download="${file.name}">
+                        <div class="file-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                        </div>
+                        <div class="file-info">
+                            <span class="file-name" title="${file.name}">${file.name}</span>
+                            <span class="file-size">${formatBytes(file.size)}</span>
+                        </div>
+                    </a>
+                `;
+                fileList.appendChild(li);
+            });
+        }
+
         async function fetchFiles() {
             const loader = document.getElementById('loader');
             const fileList = document.getElementById('file-list');
+            const syncStatus = document.getElementById('sync-status');
             
             try {
                 const response = await fetch(API_URL);
                 if (!response.ok) {
-                    throw new Error(response.status === 403 ? 'GitHub API Rate Limit Exceeded' : 'Failed to fetch directory contents');
+                    throw new Error(response.status === 403 ? 'GitHub API Rate Limit' : 'Fetch Failed');
                 }
                 
                 const data = await response.json();
-                
-                // Filter out non-files and sort alphabetically
                 const files = data.filter(item => item.type === 'file').sort((a, b) => a.name.localeCompare(b.name));
+                
+                // Cache data
+                localStorage.setItem('mb2_cached_files', JSON.stringify(files));
+                localStorage.setItem('mb2_last_sync', new Date().toLocaleString());
                 
                 loader.style.display = 'none';
                 fileList.style.display = 'grid';
-
-                if (files.length === 0) {
-                    fileList.innerHTML = `<li class="error-message">No custom assets found in the ${FOLDER_PATH} directory.</li>`;
-                    return;
-                }
-
-                files.forEach(file => {
-                    // Create direct download link to the file in github pages
-                    const downloadUrl = `${FOLDER_PATH}/${file.name}`;
-                    
-                    const li = document.createElement('li');
-                    li.className = 'file-card';
-                    li.innerHTML = `
-                        <a href="${downloadUrl}" class="file-link" download="${file.name}">
-                            <div class="file-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                            </div>
-                            <div class="file-info">
-                                <span class="file-name" title="${file.name}">${file.name}</span>
-                                <span class="file-size">${formatBytes(file.size)}</span>
-                            </div>
-                        </a>
-                    `;
-                    fileList.appendChild(li);
-                });
+                
+                renderFiles(files);
 
             } catch (error) {
                 loader.style.display = 'none';
                 fileList.style.display = 'grid';
-                fileList.innerHTML = `<li class="error-message">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; display: inline-block;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <br>
-                    Error: ${error.message}. <br>If you refreshed many times, you may have hit the GitHub rate limit. Please try again later.
-                </li>`;
+                
+                const cachedData = localStorage.getItem('mb2_cached_files');
+                const lastSync = localStorage.getItem('mb2_last_sync');
+                
+                if (cachedData) {
+                    const files = JSON.parse(cachedData);
+                    syncStatus.innerHTML = `<span style="color: #e74c3c;">SYNC FAILED</span> — CACHED: ${lastSync}`;
+                    
+                    const warningLi = document.createElement('li');
+                    warningLi.className = 'error-message';
+                    warningLi.style.background = 'rgba(243, 156, 18, 0.1)';
+                    warningLi.style.borderColor = 'rgba(243, 156, 18, 0.3)';
+                    warningLi.style.color = 'var(--primary)';
+                    warningLi.innerHTML = `⚠️ Live sync failed. Showing cached files from <strong>${lastSync}</strong>.`;
+                    fileList.appendChild(warningLi);
+                    
+                    renderFiles(files);
+                } else {
+                    fileList.innerHTML = `<li class="error-message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; display: inline-block;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <br>
+                        Error: ${error.message}. <br>If you refreshed many times, you may have hit the GitHub rate limit. Please try again later.
+                    </li>`;
+                }
             }
         }
 
