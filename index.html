@@ -332,12 +332,11 @@
     </nav>
 
     <div id="about" class="hero">
-        <div class="hero-subtitle">STAR WARS</div>
-        <h1 class="hero-title">MOVIE BATTLES II</h1>
-        <div class="hero-tagline">A Jedi Academy Modification</div>
+        <div class="hero-subtitle">MOVIE BATTLES II</div>
+        <h1 class="hero-title" style="font-size: 4.5rem; letter-spacing: 6px;">ACROWE'S CAVE</h1>
+        <div class="hero-tagline">Custom Modifications Hub</div>
         <p class="hero-description">
-            Movie Battles is a fast-paced, action-packed mod for the award-winning Jedi Knight: Jedi Academy.
-            This terminal serves as the high-speed data node for real-time asset synchronization.
+            Welcome to the official high-speed data node for Acrowe's Cave. This terminal automatically synchronizes all custom map files, assets, and modifications required to play on our servers.
         </p>
     </div>
 
@@ -347,7 +346,13 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 FastDL Asset Index
             </h2>
-            <span style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="downloadAllBtn" style="background: rgba(243, 156, 18, 0.1); color: var(--primary); border: 1px solid rgba(243, 156, 18, 0.3); padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 0.8rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.background='var(--primary)'; this.style.color='var(--bg-dark)';" onmouseout="this.style.background='rgba(243, 156, 18, 0.1)'; this.style.color='var(--primary)';">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    DOWNLOAD ALL
+                </button>
+                <span style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
+            </div>
         </div>
         
         <div id="loader" class="loader">
@@ -492,6 +497,20 @@
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Download All Logic
+        document.getElementById('downloadAllBtn').addEventListener('click', () => {
+            const links = document.querySelectorAll('.file-link');
+            if(links.length === 0) return;
+            
+            let delay = 0;
+            links.forEach(link => {
+                setTimeout(() => {
+                    link.click();
+                }, delay);
+                delay += 500; // stagger downloads by 500ms
+            });
         });
 
         // Initialize
