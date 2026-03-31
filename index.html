@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBII Custom Content Source</title>
+    <title>Acrowe's Cave — MBII Custom Content Hub</title>
+    <meta name="description" content="Download custom KOTOR maps and assets for Movie Battles II. Expanded KOTOR environments ported to JKA with high-player-count Siege support.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -11,6 +12,7 @@
         :root {
             --primary: #f39c12;
             --accent: #e74c3c;
+            --success: #27ae60;
             --bg-dark: #0f141e;
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
@@ -19,15 +21,9 @@
             --scanline-color: rgba(0, 0, 0, 0.15);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -40,27 +36,23 @@
             align-items: center;
         }
 
-        /* Scanline Background Effect */
+        /* Scanline Background */
         .background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             z-index: -1;
             background: 
                 radial-gradient(circle at center, #1b263b 0%, #0d111a 100%),
                 repeating-linear-gradient(
                     0deg,
-                    transparent,
-                    transparent 2px,
-                    var(--scanline-color) 2px,
-                    var(--scanline-color) 4px
+                    transparent, transparent 2px,
+                    var(--scanline-color) 2px, var(--scanline-color) 4px
                 );
             background-blend-mode: overlay;
         }
 
-        /* Navigation Bar */
+        /* Nav */
         nav {
             width: 100%;
             padding: 20px 40px;
@@ -71,45 +63,34 @@
             font-size: 14px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
             z-index: 10;
         }
+        nav a { color: var(--text-main); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
+        nav a:hover { color: var(--primary); text-shadow: 0 0 10px rgba(243,156,18,0.5); }
 
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             text-align: center;
             margin-top: 8vh;
             padding: 0 20px;
             animation: fadeInDown 1s ease-out forwards;
         }
-
         .hero-subtitle {
             font-family: 'Oswald', sans-serif;
             color: var(--primary);
             font-size: 18px;
             letter-spacing: 6px;
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(243, 156, 18, 0.4);
+            text-shadow: 0 0 10px rgba(243,156,18,0.4);
         }
-
         .hero-title {
             font-family: 'Cinzel', serif;
-            font-size: 5rem;
+            font-size: 4.5rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             background: linear-gradient(to bottom, #ffffff 30%, #a0aab8 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -118,7 +99,6 @@
             line-height: 1.1;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
-
         .hero-tagline {
             font-family: 'Cinzel', serif;
             color: #d1d5db;
@@ -130,20 +110,19 @@
             border-bottom: 2px solid var(--accent);
             padding-bottom: 5px;
         }
-
         .hero-description {
-            max-width: 600px;
+            max-width: 620px;
             margin: 30px auto 40px;
             font-size: 1rem;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-muted);
         }
 
-        /* Main Container */
+        /* Container */
         .container {
             width: 100%;
             max-width: 900px;
-            margin: 0 auto 60px;
+            margin: 0 auto 40px;
             background: var(--panel-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--panel-border);
@@ -155,7 +134,6 @@
             position: relative;
             z-index: 5;
         }
-
         .container-header {
             display: flex;
             justify-content: space-between;
@@ -164,7 +142,6 @@
             padding-bottom: 15px;
             border-bottom: 1px solid var(--panel-border);
         }
-
         .container-header h2 {
             font-family: 'Oswald', sans-serif;
             font-size: 1.8rem;
@@ -175,45 +152,36 @@
             gap: 10px;
         }
 
-        /* Loading Spinner */
-        .loader {
-            display: flex;
-            justify-content: center;
-            padding: 40px 0;
-        }
-
+        /* Loader */
+        .loader { display: flex; justify-content: center; padding: 40px 0; }
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
+            width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.1);
             border-left-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        /* File List */
+        /* File Grid */
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 15px;
             list-style: none;
         }
-
         .file-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 8px;
             transition: transform 0.2s, background 0.2s, border-color 0.2s;
             overflow: hidden;
         }
-
         .file-card:hover {
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(243, 156, 18, 0.3);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(243,156,18,0.3);
             box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
-
         .file-link {
             display: flex;
             align-items: center;
@@ -222,23 +190,17 @@
             color: var(--text-main);
             gap: 12px;
         }
-
         .file-icon {
-            background: rgba(243, 156, 18, 0.1);
+            background: rgba(243,156,18,0.1);
             color: var(--primary);
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-
-        .file-info {
-            overflow: hidden;
-        }
-        
+        .file-info { overflow: hidden; }
         .file-name {
             font-weight: 500;
             font-size: 0.95rem;
@@ -247,42 +209,283 @@
             text-overflow: ellipsis;
             display: block;
         }
-
-        .file-size {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            display: block;
-        }
-
+        .file-size { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block; }
         .error-message {
             text-align: center;
             color: #ef4444;
             padding: 20px;
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239,68,68,0.1);
             border-radius: 8px;
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239,68,68,0.2);
             grid-column: 1 / -1;
+        }
+
+        /* ===== SETUP WIZARD DOWNLOAD SECTION ===== */
+        .installer-banner {
+            background: linear-gradient(135deg, rgba(243,156,18,0.08) 0%, rgba(231,76,60,0.06) 100%);
+            border: 1px solid rgba(243,156,18,0.25);
+            border-radius: 12px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 20px;
+        }
+        .installer-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(243,156,18,0.2), rgba(231,76,60,0.15));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(243,156,18,0.3);
+        }
+        .installer-info { flex: 1; }
+        .installer-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        .installer-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .installer-info .badge {
+            display: inline-block;
+            background: rgba(39,174,96,0.15);
+            color: #4ade80;
+            border: 1px solid rgba(39,174,96,0.3);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-family: 'Oswald', sans-serif;
+        }
+        .btn-download-installer {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), #e67e22);
+            color: var(--bg-dark);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 14px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(243,156,18,0.35);
+        }
+        .btn-download-installer:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(243,156,18,0.55);
+            filter: brightness(1.1);
+        }
+        .installer-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 6px;
+        }
+        .installer-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(243,156,18,0.15);
+            border: 1px solid rgba(243,156,18,0.3);
+            color: var(--primary);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .installer-step p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .installer-step strong { color: var(--text-main); display: block; margin-bottom: 4px; font-size: 0.88rem; }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .faq-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.25s;
+        }
+        .faq-item:hover { border-color: rgba(243,156,18,0.2); }
+        .faq-item.open { border-color: rgba(243,156,18,0.35); }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: var(--primary); }
+        .faq-item.open .faq-question { color: var(--primary); }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 22px;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 800px;
+            padding-bottom: 18px;
+        }
+        .faq-answer p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        .faq-answer p:last-child { margin-bottom: 0; }
+
+        .faq-steps {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .faq-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .faq-step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px; height: 22px;
+            border-radius: 50%;
+            background: rgba(243,156,18,0.15);
+            border: 1px solid rgba(243,156,18,0.3);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .faq-answer code {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 0.85em;
+            color: #f9c74f;
+            font-family: 'Courier New', monospace;
+        }
+        .faq-tag {
+            display: inline-flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 6px 0;
+        }
+        .faq-tag span {
+            background: rgba(243,156,18,0.1);
+            border: 1px solid rgba(243,156,18,0.25);
+            color: var(--primary);
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.8px;
+            padding: 3px 9px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .faq-answer a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .path-block {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: #f9c74f;
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+        .path-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
         }
 
         /* Animations */
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Back to Top Button */
+        /* Back to Top */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 30px; right: 30px;
+            width: 50px; height: 50px;
             background: var(--primary);
             color: var(--bg-dark);
             border: none;
@@ -291,31 +494,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
             transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.3s;
             z-index: 100;
         }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background: #ffb547;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
-        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: #ffb547; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(243,156,18,0.6); }
 
         /* Responsive */
         @media (max-width: 768px) {
             nav { justify-content: center; flex-wrap: wrap; gap: 15px; }
-            .hero-title { font-size: 3rem; }
-            .container { margin: 20px; padding: 25px; width: auto; }
+            .hero-title { font-size: 2.8rem; }
+            .container { margin: 20px; padding: 22px; width: auto; }
+            .installer-banner { flex-direction: column; align-items: flex-start; }
+            .installer-steps { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -324,121 +519,313 @@
 
     <nav>
         <a href="#about">About</a>
-        <a href="#download" style="color: var(--primary);">Download</a>
+        <a href="#installer" style="color: var(--success);">⬇ Installer</a>
+        <a href="#download" style="color: var(--primary);">Files</a>
         <a href="#community">Community</a>
         <a href="#trailer">Trailer</a>
         <a href="#faq">FAQ</a>
         <a href="#credits">Credits</a>
     </nav>
 
+    <!-- HERO -->
     <div id="about" class="hero">
         <div class="hero-subtitle">MOVIE BATTLES II</div>
-        <h1 class="hero-title" style="font-size: 4.5rem; letter-spacing: 6px;">ACROWE'S CAVE</h1>
+        <h1 class="hero-title">ACROWE'S CAVE</h1>
         <div class="hero-tagline">Custom Modifications Hub</div>
         <p class="hero-description">
-            Welcome to the official high-speed data node for Acrowe's Cave. This terminal automatically synchronizes all custom map files, assets, and modifications required to play on our servers.
+            Welcome to the official download hub for Acrowe's Cave. This portal hosts custom KOTOR map expansions and asset packs for Movie Battles II — ported into Jedi Academy with high-player-count Siege support and expanded layouts.
         </p>
     </div>
 
+    <!-- INSTALLER SECTION -->
+    <div id="installer" class="container">
+        <div class="container-header">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--success);">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/>
+                </svg>
+                Setup Wizard
+            </h2>
+            <span style="font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">RECOMMENDED</span>
+        </div>
+
+        <div class="installer-banner">
+            <div class="installer-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f39c12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+            </div>
+            <div class="installer-info">
+                <div class="badge">✓ WINDOWS INSTALLER · EXE</div>
+                <h3>AcroweCave_Setup.exe</h3>
+                <p>One-click installer that auto-detects your Steam or GOG Jedi Academy install and places all PK3 files directly into your MBII folder. Includes all maps, KOTOR 2 asset packs, and custom content.</p>
+            </div>
+            <a id="installerDownloadBtn" href="https://github.com/DylanDom35/MB2customcontent/releases/download/v1.0/AcroweCave_Setup.exe" download="AcroweCave_Setup.exe" class="btn-download-installer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download EXE
+            </a>
+        </div>
+
+        <div class="installer-steps">
+            <div class="installer-step">
+                <div class="step-num">1</div>
+                <strong>Download the EXE</strong>
+                <p>Click the button above to get the setup wizard. No zip extraction needed.</p>
+            </div>
+            <div class="installer-step">
+                <div class="step-num">2</div>
+                <strong>Run & Point to MBII</strong>
+                <p>The wizard auto-detects your Steam or GOG install. Confirm or browse to your MBII folder.</p>
+            </div>
+            <div class="installer-step">
+                <div class="step-num">3</div>
+                <strong>Launch & Play</strong>
+                <p>Start Movie Battles II and connect to a server running Acrowe's KOTOR maps.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FASTDL FILE LIST -->
     <div id="download" class="container">
         <div class="container-header">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
                 FastDL Asset Index
             </h2>
             <div style="display: flex; align-items: center; gap: 15px;">
-                <button id="downloadAllBtn" style="background: rgba(243, 156, 18, 0.1); color: var(--primary); border: 1px solid rgba(243, 156, 18, 0.3); padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 0.8rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.background='var(--primary)'; this.style.color='var(--bg-dark)';" onmouseout="this.style.background='rgba(243, 156, 18, 0.1)'; this.style.color='var(--primary)';">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <button id="downloadAllBtn" style="background: rgba(243,156,18,0.1); color: var(--primary); border: 1px solid rgba(243,156,18,0.3); padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 0.8rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;"
+                    onmouseover="this.style.background='var(--primary)'; this.style.color='var(--bg-dark)';"
+                    onmouseout="this.style.background='rgba(243,156,18,0.1)'; this.style.color='var(--primary)';">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     DOWNLOAD ALL
                 </button>
                 <span id="sync-status" style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
             </div>
         </div>
-        
-        <div id="loader" class="loader">
-            <div class="spinner"></div>
-        </div>
 
-        <ul id="file-list" class="file-grid" style="display: none;">
-            <!-- Files injected by JS -->
-        </ul>
+        <div id="loader" class="loader"><div class="spinner"></div></div>
+        <ul id="file-list" class="file-grid" style="display: none;"></ul>
     </div>
 
-    <!-- Community Section -->
+    <!-- COMMUNITY -->
     <div id="community" class="container">
         <div class="container-header">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
                 Join the Community
             </h2>
         </div>
-        <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">
+        <p style="text-align: center; color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
             Follow my map editing work, stay up to date with server changes, and chat with other players.<br><br>
-            <a href="https://discord.gg/szfPWU2FCS" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: #5865F2; color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; transition: background 0.3s, transform 0.2s;">
+            <a href="https://discord.gg/szfPWU2FCS" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: #5865F2; color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; transition: background 0.3s, transform 0.2s;"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.background='#6d7af0';"
+               onmouseout="this.style.transform='translateY(0)'; this.style.background='#5865F2';">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                 Join Discord
             </a>
         </p>
     </div>
 
-    <!-- Placeholder Sections -->
+    <!-- TRAILER -->
     <div id="trailer" class="container" style="text-align: center;">
         <div class="container-header">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
                 Trailer
             </h2>
         </div>
         <p style="color: var(--text-muted);">Coming Soon...</p>
     </div>
 
-    <div id="faq" class="container" style="text-align: center;">
+    <!-- FAQ SECTION -->
+    <div id="faq" class="container">
         <div class="container-header">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                FAQ
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Frequently Asked Questions
             </h2>
         </div>
-        <p style="color: var(--text-muted);">Coming Soon...</p>
+
+        <div class="faq-list">
+
+            <!-- Q1: How to install via Steam -->
+            <div class="faq-item" id="faq-1">
+                <button class="faq-question" onclick="toggleFAQ('faq-1')" aria-expanded="false">
+                    <span>How do I install these files to my MBII directory via Steam?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-tag"><span>Steam</span><span>Windows</span></div>
+                    <p>Installing via Steam is the most common method. Your MBII folder lives inside your Jedi Academy Steam installation.</p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">1</span><span>Open <strong>Steam</strong> → Library → right-click <strong>Star Wars Jedi Knight: Jedi Academy</strong> → <strong>Manage → Browse local files</strong>.</span></li>
+                        <li><span class="faq-step-badge">2</span><span>This opens the <code>Jedi Academy</code> folder. Navigate into the <code>GameData</code> subfolder.</span></li>
+                        <li><span class="faq-step-badge">3</span><span>Open the <code>MBII</code> folder inside <code>GameData</code>. This is where all <code>.pk3</code> files go.</span></li>
+                        <li><span class="faq-step-badge">4</span><span>Copy all <code>.pk3</code> files you downloaded (or run the setup wizard!) and paste them into that <code>MBII</code> folder.</span></li>
+                        <li><span class="faq-step-badge">5</span><span>Launch Movie Battles II. Done — the maps will be available on any server running them.</span></li>
+                    </ul>
+                    <div class="path-block">
+                        <span class="path-label">Typical Steam path</span>
+                        C:\Program Files (x86)\Steam\steamapps\common\Jedi Academy\GameData\MBII\
+                    </div>
+                    <p>💡 <strong>Tip:</strong> Use the <a href="#installer">Setup Wizard</a> above — it auto-finds this path for you.</p>
+                </div>
+            </div>
+
+            <!-- Q2: GOG install -->
+            <div class="faq-item" id="faq-2">
+                <button class="faq-question" onclick="toggleFAQ('faq-2')" aria-expanded="false">
+                    <span>How do I install these files via GOG or a non-Steam version?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-tag"><span>GOG</span><span>Other Platforms</span></div>
+                    <p>The process is the same regardless of where you bought the game — you just need to find the <code>MBII</code> folder:</p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">1</span><span>Open <strong>GOG Galaxy</strong> → click on <em>Star Wars Jedi Knight: Jedi Academy</em> → click the <strong>folder icon</strong> or <strong>Manage Installation → Show folder</strong>.</span></li>
+                        <li><span class="faq-step-badge">2</span><span>Navigate to <code>GameData\MBII</code> inside that folder.</span></li>
+                        <li><span class="faq-step-badge">3</span><span>Paste all downloaded <code>.pk3</code> files into the <code>MBII</code> folder.</span></li>
+                        <li><span class="faq-step-badge">4</span><span>Launch MBII and you're good to go.</span></li>
+                    </ul>
+                    <div class="path-block">
+                        <span class="path-label">Common GOG paths</span>
+                        C:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII\<br>
+                        D:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII\
+                    </div>
+                    <p>If you installed to a custom location, just search your PC for <code>MBII</code> as a folder name and drop the pk3 files inside it.</p>
+                </div>
+            </div>
+
+            <!-- Q3: Manual zip method -->
+            <div class="faq-item" id="faq-3">
+                <button class="faq-question" onclick="toggleFAQ('faq-3')" aria-expanded="false">
+                    <span>Can I manually download individual files instead of using the installer?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! The <a href="#download">FastDL Asset Index</a> above lists every individual <code>.pk3</code> file. You can download them one by one or hit <strong>Download All</strong>.</p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">1</span><span>Click each file in the Asset Index or use the <strong>DOWNLOAD ALL</strong> button.</span></li>
+                        <li><span class="faq-step-badge">2</span><span>Once downloaded, move all <code>.pk3</code> files into your <code>MBII</code> folder (see the Steam or GOG FAQ above for the exact path).</span></li>
+                        <li><span class="faq-step-badge">3</span><span>Do <strong>not</strong> extract the <code>.pk3</code> files — they go directly into <code>MBII</code> as-is.</span></li>
+                    </ul>
+                    <p>The setup wizard does all of this automatically, which is why it's recommended for first-time installs.</p>
+                </div>
+            </div>
+
+            <!-- Q4: What are you working on -->
+            <div class="faq-item" id="faq-4">
+                <button class="faq-question" onclick="toggleFAQ('faq-4')" aria-expanded="false">
+                    <span>What content are you currently working on?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-tag"><span>Dev Update</span><span>KOTOR Maps</span></div>
+                    <p>Right now I'm focused exclusively on <strong>expanding and improving the KOTOR maps that were previously ported into Jedi Knight: Jedi Academy</strong> — reworking them from their original small duel-map format into larger, fully-featured Siege maps built for high player counts on Movie Battles II.</p>
+                    <p>The original KOTOR map ports were duel-sized environments. My goal is to take those same iconic locations and make them <em>bigger, more detailed, and properly balanced</em> for 20+ player matches — including objectives, better navigation, improved geometry, and expanded playable areas.</p>
+                    <p><strong>Current maps in active development:</strong></p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_korribanacademy</strong> — Expanding the Korriban Sith Academy into a full multi-room Siege map.</span></li>
+                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_peragus</strong> — Peragus Mining Facility from KOTOR 2, reworked for large-scale combat.</span></li>
+                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_daviks_estate</strong> — Davik's Estate from the original KOTOR, expanded with objectives.</span></li>
+                    </ul>
+                    <p>More maps from the KOTOR universe may be added in the future as this project grows. Follow the Discord for updates.</p>
+                </div>
+            </div>
+
+            <!-- Q5: What is Movie Battles II -->
+            <div class="faq-item" id="faq-5">
+                <button class="faq-question" onclick="toggleFAQ('faq-5')" aria-expanded="false">
+                    <span>What is Movie Battles II and where do I get it?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p><strong>Movie Battles II (MBII)</strong> is a free, community-made total conversion mod for <em>Star Wars Jedi Knight: Jedi Academy</em>. It features class-based multiplayer, lightsaber combat, and iconic Star Wars locations from the films.</p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">1</span><span>Own a copy of <strong>Star Wars Jedi Knight: Jedi Academy</strong> (available on Steam, GOG, or other platforms).</span></li>
+                        <li><span class="faq-step-badge">2</span><span>Download the Movie Battles II launcher from <a href="https://www.moviebattles.org" target="_blank">moviebattles.org</a>.</span></li>
+                        <li><span class="faq-step-badge">3</span><span>Run the launcher — it will auto-install MBII into your Jedi Academy folder.</span></li>
+                        <li><span class="faq-step-badge">4</span><span>Install Acrowe's custom content using the setup wizard above, then connect to a KOTOR-map server!</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Q6: Files not showing in game -->
+            <div class="faq-item" id="faq-6">
+                <button class="faq-question" onclick="toggleFAQ('faq-6')" aria-expanded="false">
+                    <span>I installed the files but they aren't showing up / the map is missing. Help!</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>A few common things to check:</p>
+                    <ul class="faq-steps">
+                        <li><span class="faq-step-badge">!</span><span>Make sure the <code>.pk3</code> files are in the <strong>MBII folder</strong>, not the base <code>GameData</code> or <code>base</code> folder.</span></li>
+                        <li><span class="faq-step-badge">!</span><span>Make sure you did <strong>not</strong> extract the <code>.pk3</code> files — they are archives that the engine reads directly.</span></li>
+                        <li><span class="faq-step-badge">!</span><span>Restart Movie Battles II completely after adding files.</span></li>
+                        <li><span class="faq-step-badge">!</span><span>If connecting to a server, the map must be running on the server — you can't access these maps in the menus unless a server loads them.</span></li>
+                    </ul>
+                    <p>Still having issues? Join the <a href="https://discord.gg/szfPWU2FCS" target="_blank">Discord</a> and ask in the support channel.</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <div id="credits" class="container" style="text-align: center; margin-bottom: 40px;">
+    <!-- CREDITS -->
+    <div id="credits" class="container" style="text-align: center; margin-bottom: 60px;">
         <div class="container-header">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
                 Credits
             </h2>
         </div>
-        <ul style="color: var(--text-muted); list-style: none; padding: 0; line-height: 1.8;">
-            <li><strong style="color: var(--text-main);">Texture Credits:</strong> Raven Software, LucasArts, Obsidian Entertainment and Bioware.</li>
+        <ul style="color: var(--text-muted); list-style: none; padding: 0; line-height: 2;">
+            <li><strong style="color: var(--text-main);">Texture Credits:</strong> Raven Software, LucasArts, Obsidian Entertainment and BioWare.</li>
             <li><strong style="color: var(--text-main);">Music:</strong> John Williams and Mark Griskey.</li>
-            <li><strong style="color: var(--text-main);">Original Kotor Map Porting efforts for duel maps to JKA:</strong> JESUS F.G./JAMYZGENIUS</li>
+            <li><strong style="color: var(--text-main);">Original KOTOR Map Porting for JKA duel maps:</strong> JESUS F.G. / JAMYZGENIUS</li>
+            <li><strong style="color: var(--text-main);">KOTOR Siege Expansions & Custom Content:</strong> Acrowe</li>
         </ul>
     </div>
 
+    <!-- Back to Top -->
+    <button id="backToTopBtn" class="back-to-top" title="Go to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
     <script>
         const REPO_OWNER = 'DylanDom35';
-        const REPO_NAME = 'MB2customcontent';
+        const REPO_NAME  = 'MB2customcontent';
         const FOLDER_PATH = 'MBII';
         const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FOLDER_PATH}`;
 
+        // ---- Utilities ----
         function formatBytes(bytes, decimals = 2) {
             if (!+bytes) return '0 Bytes';
-            const k = 1024;
-            const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            const k = 1024, dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes','KB','MB','GB','TB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
         }
 
+        // ---- File Rendering ----
         function renderFiles(files) {
             const fileList = document.getElementById('file-list');
-            
             if (files.length === 0) {
                 fileList.innerHTML += `<li class="error-message">No custom assets found in the ${FOLDER_PATH} directory.</li>`;
                 return;
             }
-
             files.forEach(file => {
                 const downloadUrl = `${FOLDER_PATH}/${file.name}`;
                 const li = document.createElement('li');
@@ -446,7 +833,7 @@
                 li.innerHTML = `
                     <a href="${downloadUrl}" class="file-link" download="${file.name}">
                         <div class="file-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
                         </div>
                         <div class="file-info">
                             <span class="file-name" title="${file.name}">${file.name}</span>
@@ -458,107 +845,85 @@
             });
         }
 
+        // ---- Fetch Files ----
         async function fetchFiles() {
             const loader = document.getElementById('loader');
             const fileList = document.getElementById('file-list');
             const syncStatus = document.getElementById('sync-status');
-            
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 6000); // 6 second timeout
-            
+            const timeoutId = setTimeout(() => controller.abort(), 6000);
             try {
                 const response = await fetch(API_URL, { signal: controller.signal });
                 clearTimeout(timeoutId);
-                
-                if (!response.ok) {
-                    throw new Error(response.status === 403 ? 'GitHub API Rate Limit' : 'Fetch Failed');
-                }
-                
+                if (!response.ok) throw new Error(response.status === 403 ? 'GitHub API Rate Limit' : 'Fetch Failed');
                 const data = await response.json();
-                const files = data.filter(item => item.type === 'file').sort((a, b) => a.name.localeCompare(b.name));
-                
-                // Cache data
+                const files = data.filter(i => i.type === 'file').sort((a,b) => a.name.localeCompare(b.name));
                 localStorage.setItem('mb2_cached_files', JSON.stringify(files));
                 localStorage.setItem('mb2_last_sync', new Date().toLocaleString());
-                
                 loader.style.display = 'none';
                 fileList.style.display = 'grid';
-                
                 renderFiles(files);
-
             } catch (error) {
                 loader.style.display = 'none';
                 fileList.style.display = 'grid';
-                
                 const isTimeout = error.name === 'AbortError';
                 const errorMessage = isTimeout ? 'Connection Timed Out' : error.message;
-                
                 const cachedData = localStorage.getItem('mb2_cached_files');
-                const lastSync = localStorage.getItem('mb2_last_sync');
-                
+                const lastSync   = localStorage.getItem('mb2_last_sync');
                 if (cachedData) {
-                    const files = JSON.parse(cachedData);
-                    syncStatus.innerHTML = `<span style="color: #e74c3c;">SYNC FAILED</span> — CACHED: ${lastSync}`;
-                    
+                    syncStatus.innerHTML = `<span style="color:#e74c3c;">SYNC FAILED</span> — CACHED: ${lastSync}`;
                     const warningLi = document.createElement('li');
                     warningLi.className = 'error-message';
-                    warningLi.style.background = 'rgba(243, 156, 18, 0.1)';
-                    warningLi.style.borderColor = 'rgba(243, 156, 18, 0.3)';
-                    warningLi.style.color = 'var(--primary)';
+                    warningLi.style.cssText = 'background:rgba(243,156,18,0.1);border-color:rgba(243,156,18,0.3);color:var(--primary);';
                     warningLi.innerHTML = `⚠️ Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
                     fileList.appendChild(warningLi);
-                    
-                    renderFiles(files);
+                    renderFiles(JSON.parse(cachedData));
                 } else {
                     fileList.innerHTML = `<li class="error-message">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; display: inline-block;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                        <br>
-                        Error: ${errorMessage}. <br>If you refreshed many times, you may have hit the GitHub rate limit. Please try again later.
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:10px;display:inline-block;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <br>Error: ${errorMessage}.<br>GitHub rate limit may have been hit. Please try again later.
                     </li>`;
                 }
             }
         }
 
+        // ---- FAQ Toggle ----
+        function toggleFAQ(id) {
+            const item = document.getElementById(id);
+            const isOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item.open').forEach(el => {
+                el.classList.remove('open');
+                el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            // Open clicked if it was closed
+            if (!isOpen) {
+                item.classList.add('open');
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // ---- Init ----
         function initializeUI() {
-            // Fetch FastDL files
             fetchFiles();
 
-            // Back to Top Logic
+            // Back to top
             const backToTopBtn = document.getElementById('backToTopBtn');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
+                backToTopBtn.classList.toggle('visible', window.scrollY > 300);
             });
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Download All Logic
+            // Download all
             document.getElementById('downloadAllBtn').addEventListener('click', () => {
                 const links = document.querySelectorAll('.file-link');
-                if(links.length === 0) return;
-                
+                if (!links.length) return;
                 let delay = 0;
-                links.forEach(link => {
-                    setTimeout(() => {
-                        link.click();
-                    }, delay);
-                    delay += 500; // stagger downloads by 500ms
-                });
+                links.forEach(link => { setTimeout(() => link.click(), delay); delay += 500; });
             });
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', initializeUI);
     </script>
-
-    <!-- Back to Top Button -->
-    <button id="backToTopBtn" class="back-to-top" title="Go to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-    </button>
 </body>
 </html>
