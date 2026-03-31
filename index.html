@@ -19,6 +19,10 @@
             --scanline-color: rgba(0, 0, 0, 0.15);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -272,6 +276,41 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.3s;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #ffb547;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav { justify-content: center; flex-wrap: wrap; gap: 15px; }
@@ -365,7 +404,11 @@
                 Credits
             </h2>
         </div>
-        <p style="color: var(--text-muted);">Coming Soon...</p>
+        <ul style="color: var(--text-muted); list-style: none; padding: 0; line-height: 1.8;">
+            <li><strong style="color: var(--text-main);">Texture Credits:</strong> Raven Software, LucasArts, Obsidian Entertainment and Bioware.</li>
+            <li><strong style="color: var(--text-main);">Music:</strong> John Williams and Mark Griskey.</li>
+            <li><strong style="color: var(--text-main);">Original Kotor Map Porting efforts for duel maps to JKA:</strong> JESUS F.G./JAMYZGENIUS</li>
+        </ul>
     </div>
 
     <script>
@@ -437,8 +480,27 @@
             }
         }
 
+        // Back to Top Logic
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', fetchFiles);
     </script>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top" title="Go to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
 </body>
 </html>
