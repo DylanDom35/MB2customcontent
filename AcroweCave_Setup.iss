@@ -4,7 +4,7 @@
 ; ============================================================
 
 #define MyAppName    "Acrowe's Cave — MBII Custom Content"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "Acrowe"
 #define MyAppURL     "https://acrowescave.com"
 #define MyExeName    "AcroweCave_Setup.exe"
@@ -48,7 +48,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [CustomMessages]
 english.WelcomeLabel1=Welcome to Acrowe's Cave Installer
-english.WelcomeLabel2=This wizard will install the KOTOR/KOTOR 2 custom map pack for Movie Battles II.%n%nThese maps bring expanded KOTOR environments into MBII with high player-count Siege support:%n%n  - mb2_korribanacademy%n  - mb2_peragus%n  - mb2_daviks_estate%n  - KOTOR 2 Asset Packs%n%nClick Next to continue.
+english.WelcomeLabel2=This wizard will install the KOTOR/KOTOR 2 custom map pack for Movie Battles II.%n%nThese maps bring expanded environments into MBII with high player-count Siege support:%n%n  - mb2_korribanacademy%n  - mb2_peragus%n  - mb2_daviks_estate%n  - mb2_sulon%n  - KOTOR 2 Asset Packs%n%nClick Next to continue.
 english.SelectDirLabel3=The installer needs to place files in your MBII folder.%n%nSteam users: ...%steamapps%\common\Jedi Academy\GameData\MBII%nGOG users: C:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII%n%nIf the path below is wrong, click Browse and navigate to your MBII folder.
 english.SelectDirBrowseLabel=To continue, click Next. If you would like to select a different MBII folder, click Browse.
 
@@ -67,6 +67,7 @@ Source: "MBII\zzz_kotor_siege_fix.pk3";      DestDir: "{app}"; Flags: ignorevers
 Source: "MBII\mb2_korribanacademy.pk3";      DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\mb2_peragus.pk3";              DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\zzz_mb2_daviks_estate.pk3";    DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_sulon.pk3";               DestDir: "{app}"; Flags: ignoreversion
 ; Sky + Legend packs
 Source: "MBII\TELOSSKY.pk3";                DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\z_MBLegends.pk3";             DestDir: "{app}"; Flags: ignoreversion
