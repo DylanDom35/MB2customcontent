@@ -210,6 +210,15 @@
             display: block;
         }
         .file-size { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block; }
+        .file-updated {
+            font-size: 0.7rem;
+            color: rgba(243,156,18,0.6);
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .file-updated svg { flex-shrink: 0; opacity: 0.7; }
         .error-message {
             text-align: center;
             color: #ef4444;
@@ -830,6 +839,7 @@
                 const downloadUrl = `${FOLDER_PATH}/${file.name}`;
                 const li = document.createElement('li');
                 li.className = 'file-card';
+                const updatedId = `upd-${file.name.replace(/\./g, '-')}`;
                 li.innerHTML = `
                     <a href="${downloadUrl}" class="file-link" download="${file.name}">
                         <div class="file-icon">
@@ -838,11 +848,44 @@
                         <div class="file-info">
                             <span class="file-name" title="${file.name}">${file.name}</span>
                             <span class="file-size">${formatBytes(file.size)}</span>
+                            <span class="file-updated" id="${updatedId}">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span>Loading...</span>
+                            </span>
                         </div>
                     </a>
                 `;
                 fileList.appendChild(li);
+                fetchLastUpdated(file.name, updatedId);
             });
+        }
+
+        // ---- Fetch Last Commit Date Per File ----
+        async function fetchLastUpdated(fileName, elementId) {
+            const cacheKey = `mb2_commit_${fileName}`;
+            const cached = sessionStorage.getItem(cacheKey);
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            if (cached) {
+                el.querySelector('span').textContent = cached;
+                return;
+            }
+
+            try {
+                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${FOLDER_PATH}/${encodeURIComponent(fileName)}&per_page=1`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                if (!data.length) throw new Error();
+                const date = new Date(data[0].commit.committer.date);
+                const formatted = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                    + ' · ' + date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                sessionStorage.setItem(cacheKey, formatted);
+                el.querySelector('span').textContent = formatted;
+            } catch {
+                el.querySelector('span').textContent = 'Unknown';
+            }
         }
 
         // ---- Fetch Files ----
