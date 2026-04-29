@@ -129,10 +129,15 @@
             border-radius: 12px;
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-            animation: fadeInUp 1s ease-out 0.3s forwards;
             opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             position: relative;
             z-index: 5;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .container-header {
             display: flex;
@@ -228,6 +233,31 @@
             border: 1px solid rgba(239,68,68,0.2);
             grid-column: 1 / -1;
         }
+
+        /* Search Box & Live Status */
+        .search-box { position: relative; display: flex; align-items: center; }
+        .search-box svg { position: absolute; left: 10px; color: var(--text-muted); pointer-events: none; }
+        #mapSearch {
+            background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main);
+            padding: 8px 12px 8px 34px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            width: 200px; transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #mapSearch:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 8px rgba(243, 156, 18, 0.3); }
+        .live-status { color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(39, 174, 96, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+        }
+        .badge-new { background: var(--success); color: white; font-size: 0.65rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-left: 8px; animation: pulse 2s infinite; font-family: 'Oswald', sans-serif; letter-spacing: 1px; vertical-align: middle; display: inline-block; }
+        
+        .file-link-container { display: flex; align-items: center; height: 100%; }
+        .copy-btn {
+            background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 8px; border-radius: 6px;
+            transition: color 0.2s, background 0.2s; display: flex; align-items: center; justify-content: center; margin-right: 12px;
+        }
+        .copy-btn:hover { color: var(--primary); background: rgba(243, 156, 18, 0.1); }
 
         /* ===== SETUP WIZARD DOWNLOAD SECTION ===== */
         .installer-banner {
@@ -542,7 +572,7 @@
         <h1 class="hero-title">ACROWE'S CAVE</h1>
         <div class="hero-tagline">Custom Modifications Hub</div>
         <p class="hero-description">
-            Welcome to the official download hub for Acrowe's Cave. This portal hosts custom KOTOR map expansions and asset packs for Movie Battles II — ported into Jedi Academy with high-player-count Siege support and expanded layouts.
+            Welcome to the official download hub for Acrowe's Cave. This portal hosts custom map expansions and asset packs for Movie Battles II — ported into Jedi Academy with high-player-count Siege support and expanded layouts.
         </p>
     </div>
 
@@ -605,19 +635,23 @@
                 </svg>
                 FastDL Asset Index
             </h2>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <button id="downloadAllBtn" style="background: rgba(243,156,18,0.1); color: var(--primary); border: 1px solid rgba(243,156,18,0.3); padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 0.8rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;"
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: flex-end;">
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="mapSearch" placeholder="Search files..." autocomplete="off">
+                </div>
+                <button id="downloadAllBtn" style="background: rgba(243,156,18,0.1); color: var(--primary); border: 1px solid rgba(243,156,18,0.3); padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 0.85rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;"
                     onmouseover="this.style.background='var(--primary)'; this.style.color='var(--bg-dark)';"
                     onmouseout="this.style.background='rgba(243,156,18,0.1)'; this.style.color='var(--primary)';">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     DOWNLOAD ALL
                 </button>
-                <span id="sync-status" style="color: var(--text-muted); font-size: 0.9em; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">AUTO-SYNC ACTIVE</span>
+                <span id="sync-status" class="live-status"><span class="pulse-dot"></span> AUTO-SYNC ACTIVE</span>
             </div>
         </div>
 
         <div id="loader" class="loader"><div class="spinner"></div></div>
-        <ul id="file-list" class="file-grid" style="display: none;"></ul>
+        <div id="file-sections" style="display: none;"></div>
     </div>
 
     <!-- COMMUNITY -->
@@ -829,47 +863,159 @@
         }
 
         // ---- File Rendering ----
+        function formatMapName(filename) {
+            let name = filename.replace(/\.pk3$/i, '');
+            const map = {
+                'mb2_boonta_eve': 'Boonta Eve',
+                'mb2_korribanacademy': 'Korriban Academy',
+                'mb2_peragus': 'Peragus',
+                'mb2_sulon': 'Sulon',
+                'TELOSSKY': 'Telos Sky',
+                'z_MBLegends': 'MB Legends',
+                'zzz_kotor_siege_fix': 'KOTOR Siege Fix',
+                'zzz_kotor2_assets_part1': 'KOTOR 2 Assets - Part 1',
+                'zzz_kotor2_assets_part2': 'KOTOR 2 Assets - Part 2',
+                'zzz_kotor2_assets_part3': 'KOTOR 2 Assets - Part 3',
+                'zzz_kotor2_assets_part4': 'KOTOR 2 Assets - Part 4',
+                'zzz_kotor2_assets_part5': 'KOTOR 2 Assets - Part 5'
+            };
+            if (map[name]) return map[name];
+            name = name.replace(/^(mb2_|zzz_|z_)/i, '');
+            return name.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
         function renderFiles(files) {
-            const fileList = document.getElementById('file-list');
+            const container = document.getElementById('file-sections');
+            container.innerHTML = '';
+
             if (files.length === 0) {
-                fileList.innerHTML += `<li class="error-message">No custom assets found in the ${FOLDER_PATH} directory.</li>`;
+                container.innerHTML = `<div class="error-message">No custom assets found in the ${FOLDER_PATH} directory.</div>`;
                 return;
             }
-            files.forEach(file => {
-                const downloadUrl = `${FOLDER_PATH}/${file.name}`;
-                const li = document.createElement('li');
-                li.className = 'file-card';
-                const updatedId = `upd-${file.name.replace(/\./g, '-')}`;
-                li.innerHTML = `
-                    <a href="${downloadUrl}" class="file-link" download="${file.name}">
-                        <div class="file-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+
+            const maxTime = Math.max(...files.map(f => f.lastUpdatedTime || 0));
+            const recentlyUpdated = [];
+            const otherFiles = [];
+
+            files.forEach(f => {
+                if (f.lastUpdatedTime === maxTime && maxTime > 0) {
+                    recentlyUpdated.push(f);
+                } else {
+                    otherFiles.push(f);
+                }
+            });
+
+            const groups = {
+                'Map Files': [],
+                'Asset Packs (Download Together)': []
+            };
+
+            otherFiles.forEach(f => {
+                if (f.name.includes('part') || f.name.includes('z_MBLegends') || f.name.includes('fix')) {
+                    groups['Asset Packs (Download Together)'].push(f);
+                } else {
+                    groups['Map Files'].push(f);
+                }
+            });
+
+            const renderGroup = (title, fileArray, isHighlighted = false) => {
+                if (fileArray.length === 0) return;
+
+                const section = document.createElement('div');
+                section.className = 'file-section';
+                if (isHighlighted) {
+                    section.style.background = 'rgba(39, 174, 96, 0.05)';
+                    section.style.border = '1px solid rgba(39, 174, 96, 0.2)';
+                    section.style.borderRadius = '12px';
+                    section.style.padding = '20px';
+                    section.style.marginBottom = '30px';
+                } else {
+                    section.style.marginBottom = '30px';
+                }
+
+                const header = document.createElement('h3');
+                header.style.fontFamily = "'Oswald', sans-serif";
+                header.style.color = isHighlighted ? 'var(--success)' : 'var(--primary)';
+                header.style.marginBottom = '15px';
+                header.style.fontSize = '1.2rem';
+                header.style.letterSpacing = '1px';
+                header.style.textTransform = 'uppercase';
+                header.innerHTML = isHighlighted ? `✨ ${title}` : title;
+                section.appendChild(header);
+
+                const ul = document.createElement('ul');
+                ul.className = 'file-grid';
+
+                fileArray.forEach(file => {
+                    const downloadUrl = `${FOLDER_PATH}/${file.name}`;
+                    const absoluteUrl = new URL(downloadUrl, window.location.href).href;
+                    const li = document.createElement('li');
+                    li.className = 'file-card';
+                    
+                    const isPack = file.name.includes('part') || file.name.includes('z_MBLegends') || file.name.includes('fix');
+                    const iconSvg = isPack 
+                        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>` 
+                        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`;
+                    
+                    const newBadge = (isHighlighted && file.lastUpdatedTime === maxTime) ? `<span class="badge-new">NEW</span>` : '';
+
+                    li.innerHTML = `
+                        <div class="file-link-container">
+                            <a href="${downloadUrl}" class="file-link" download="${file.name}" style="flex: 1;">
+                                <div class="file-icon">${iconSvg}</div>
+                                <div class="file-info">
+                                    <span class="file-name" title="${file.name}">${formatMapName(file.name)}${newBadge}</span>
+                                    <span class="file-size">${formatBytes(file.size)}</span>
+                                    <span class="file-updated" style="color: ${isHighlighted ? 'var(--success)' : 'rgba(243,156,18,0.6)'}">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <span>${file.lastUpdatedFormatted || 'Unknown'}</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <button class="copy-btn" title="Copy Direct Link" data-url="${absoluteUrl}">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
                         </div>
-                        <div class="file-info">
-                            <span class="file-name" title="${file.name}">${file.name}</span>
-                            <span class="file-size">${formatBytes(file.size)}</span>
-                            <span class="file-updated" id="${updatedId}">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                <span>Loading...</span>
-                            </span>
-                        </div>
-                    </a>
-                `;
-                fileList.appendChild(li);
-                fetchLastUpdated(file.name, updatedId);
+                    `;
+                    ul.appendChild(li);
+                });
+
+                section.appendChild(ul);
+                container.appendChild(section);
+            };
+
+            renderGroup('Recently Updated', recentlyUpdated, true);
+            renderGroup('Map Files', groups['Map Files']);
+            renderGroup('Asset Packs (Download Together)', groups['Asset Packs (Download Together)']);
+
+            // Attach Copy Listeners
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        await navigator.clipboard.writeText(btn.getAttribute('data-url'));
+                        const originalHtml = btn.innerHTML;
+                        btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                        setTimeout(() => btn.innerHTML = originalHtml, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy', err);
+                    }
+                });
             });
         }
 
         // ---- Fetch Last Commit Date Per File ----
-        async function fetchLastUpdated(fileName, elementId) {
+        async function getFileDate(fileName) {
             const cacheKey = `mb2_commit_${fileName}`;
             const cached = sessionStorage.getItem(cacheKey);
-            const el = document.getElementById(elementId);
-            if (!el) return;
-
             if (cached) {
-                el.querySelector('span').textContent = cached;
-                return;
+                try {
+                    const parsed = JSON.parse(cached);
+                    if (parsed.formatted && parsed.time) return parsed;
+                } catch {
+                    return { formatted: cached, time: 0 };
+                }
             }
 
             try {
@@ -881,17 +1027,19 @@
                 const date = new Date(data[0].commit.committer.date);
                 const formatted = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                     + ' · ' + date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-                sessionStorage.setItem(cacheKey, formatted);
-                el.querySelector('span').textContent = formatted;
+                const time = date.getTime();
+                const result = { formatted, time };
+                sessionStorage.setItem(cacheKey, JSON.stringify(result));
+                return result;
             } catch {
-                el.querySelector('span').textContent = 'Unknown';
+                return { formatted: 'Unknown', time: 0 };
             }
         }
 
         // ---- Fetch Files ----
         async function fetchFiles() {
             const loader = document.getElementById('loader');
-            const fileList = document.getElementById('file-list');
+            const fileSections = document.getElementById('file-sections');
             const syncStatus = document.getElementById('sync-status');
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 6000);
@@ -900,32 +1048,42 @@
                 clearTimeout(timeoutId);
                 if (!response.ok) throw new Error(response.status === 403 ? 'GitHub API Rate Limit' : 'Fetch Failed');
                 const data = await response.json();
-                const files = data.filter(i => i.type === 'file').sort((a,b) => a.name.localeCompare(b.name));
-                localStorage.setItem('mb2_cached_files', JSON.stringify(files));
+                let files = data.filter(i => i.type === 'file');
+                
+                await Promise.all(files.map(async file => {
+                    const dateInfo = await getFileDate(file.name);
+                    file.lastUpdatedFormatted = dateInfo.formatted;
+                    file.lastUpdatedTime = dateInfo.time;
+                }));
+                
+                files.sort((a,b) => a.name.localeCompare(b.name));
+
+                localStorage.setItem('mb2_cached_files_v2', JSON.stringify(files));
                 localStorage.setItem('mb2_last_sync', new Date().toLocaleString());
                 loader.style.display = 'none';
-                fileList.style.display = 'grid';
+                fileSections.style.display = 'block';
                 renderFiles(files);
             } catch (error) {
                 loader.style.display = 'none';
-                fileList.style.display = 'grid';
+                fileSections.style.display = 'block';
                 const isTimeout = error.name === 'AbortError';
                 const errorMessage = isTimeout ? 'Connection Timed Out' : error.message;
-                const cachedData = localStorage.getItem('mb2_cached_files');
+                const cachedData = localStorage.getItem('mb2_cached_files_v2');
                 const lastSync   = localStorage.getItem('mb2_last_sync');
                 if (cachedData) {
                     syncStatus.innerHTML = `<span style="color:#e74c3c;">SYNC FAILED</span> — CACHED: ${lastSync}`;
-                    const warningLi = document.createElement('li');
-                    warningLi.className = 'error-message';
-                    warningLi.style.cssText = 'background:rgba(243,156,18,0.1);border-color:rgba(243,156,18,0.3);color:var(--primary);';
-                    warningLi.innerHTML = `⚠️ Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
-                    fileList.appendChild(warningLi);
                     renderFiles(JSON.parse(cachedData));
+                    
+                    const warningDiv = document.createElement('div');
+                    warningDiv.className = 'error-message';
+                    warningDiv.style.cssText = 'background:rgba(243,156,18,0.1);border-color:rgba(243,156,18,0.3);color:var(--primary);margin-bottom:20px;';
+                    warningDiv.innerHTML = `⚠️ Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
+                    fileSections.insertBefore(warningDiv, fileSections.firstChild);
                 } else {
-                    fileList.innerHTML = `<li class="error-message">
+                    fileSections.innerHTML = `<div class="error-message">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:10px;display:inline-block;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                         <br>Error: ${errorMessage}.<br>GitHub rate limit may have been hit. Please try again later.
-                    </li>`;
+                    </div>`;
                 }
             }
         }
@@ -950,6 +1108,17 @@
         function initializeUI() {
             fetchFiles();
 
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll('.container').forEach(c => observer.observe(c));
+
             // Back to top
             const backToTopBtn = document.getElementById('backToTopBtn');
             window.addEventListener('scroll', () => {
@@ -957,12 +1126,36 @@
             });
             backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            // Download all
+            // Map Search Filter
+            document.getElementById('mapSearch').addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                document.querySelectorAll('.file-card').forEach(card => {
+                    const name = card.querySelector('.file-name').textContent.toLowerCase();
+                    card.style.display = name.includes(term) ? 'block' : 'none';
+                });
+                
+                document.querySelectorAll('.file-section').forEach(section => {
+                    const visibleCards = section.querySelectorAll('.file-card[style="display: block;"], .file-card:not([style*="display: none"])');
+                    section.style.display = visibleCards.length ? 'block' : 'none';
+                });
+            });
+
+            // Download all (deduplicated)
             document.getElementById('downloadAllBtn').addEventListener('click', () => {
                 const links = document.querySelectorAll('.file-link');
                 if (!links.length) return;
+                
+                const uniqueUrls = new Set();
+                const uniqueLinks = [];
+                links.forEach(link => {
+                    if (!uniqueUrls.has(link.href)) {
+                        uniqueUrls.add(link.href);
+                        uniqueLinks.push(link);
+                    }
+                });
+
                 let delay = 0;
-                links.forEach(link => { setTimeout(() => link.click(), delay); delay += 500; });
+                uniqueLinks.forEach(link => { setTimeout(() => link.click(), delay); delay += 500; });
             });
         }
 
