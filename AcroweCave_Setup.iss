@@ -74,7 +74,23 @@ Source: "MBII\z_MBLegends.pk3";               DestDir: "{app}"; Flags: ignorever
 ; Acrowe Ultimate Override Pack (character buffs, map edits, server content)
 Source: "MBII\zzzz_acrow_ultimate.pk3";       DestDir: "{app}"; Flags: ignoreversion
 
+
+; Acrow CTF Map Packs
+Source: "MBII\acrow_pack_antalus_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_bloodmine.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_ctf_korriban.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_ctf_mazearena.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_CTF_Nar_Kreeta.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_ctf_yavin.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_HR_CTF.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_HR_CTF_Fire_effects.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_HR_CTF_music.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_icm_ctf2.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_ilam_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_sjc_mygeeto.pk3"; DestDir: "{app}"; Flags: ignoreversion
+
 [Code]
+
 // -------------------------------------------------------
 // Auto-detect the MBII installation directory
 // Priority: Steam > GOG > Manual
