@@ -72,7 +72,8 @@ Source: "MBII\mb2_sulon.pk3";               DestDir: "{app}"; Flags: ignoreversi
 Source: "MBII\TELOSSKY.pk3";                  DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\z_MBLegends.pk3";               DestDir: "{app}"; Flags: ignoreversion
 ; Acrowe Ultimate Override Pack (character buffs, map edits, server content)
-Source: "MBII\zzzz_acrow_ultimate.pk3";       DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_ultimate_part1.pk3";       DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_ultimate_part2.pk3";       DestDir: "{app}"; Flags: ignoreversion
 
 
 ; Acrow CTF Map Packs
