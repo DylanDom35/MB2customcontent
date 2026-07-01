@@ -648,7 +648,7 @@
 
     <nav>
         <a href="#about">About</a>
-        <a href="#installer" style="color: var(--success);">⬇ Installer</a>
+        <a href="#installer" style="color: var(--success);">Installer</a>
         <a href="#download" style="color: var(--primary);">Files</a>
         <a href="#patchnotes" style="color: #ffb547;">Patch Notes</a>
         <a href="#community">Community</a>
@@ -686,7 +686,7 @@
                 </svg>
             </div>
             <div class="installer-info">
-                <div class="badge">✓ WINDOWS INSTALLER · EXE</div>
+                <div class="badge">WINDOWS INSTALLER · EXE</div>
                 <h3>AcroweCave_Setup.exe</h3>
                 <p>One-click installer that auto-detects your Steam or GOG Jedi Academy install and places all PK3 files directly into your MBII folder. Includes all maps, KOTOR 2 asset packs, and custom content.</p>
             </div>
@@ -763,7 +763,7 @@
             <div class="patch-card">
                 <div class="patch-header">
                     <div class="patch-title">
-                        <span>⚔️ Legends Custom Balance Adjustments</span>
+                        <span>Legends Custom Balance Adjustments</span>
                     </div>
                     <div class="patch-date">JUNE 4, 2026</div>
                 </div>
@@ -835,7 +835,7 @@
             <div class="patch-card">
                 <div class="patch-header">
                     <div class="patch-title">
-                        <span>🛡️ Previous Balance Adjustments</span>
+                        <span>Previous Balance Adjustments</span>
                     </div>
                     <div class="patch-date">PREVIOUS</div>
                 </div>
@@ -931,7 +931,7 @@
                         <span class="path-label">Typical Steam path</span>
                         C:\Program Files (x86)\Steam\steamapps\common\Jedi Academy\GameData\MBII\
                     </div>
-                    <p>💡 <strong>Tip:</strong> Use the <a href="#installer">Setup Wizard</a> above — it auto-finds this path for you.</p>
+                    <p><strong>Tip:</strong> Use the <a href="#installer">Setup Wizard</a> above — it auto-finds this path for you.</p>
                 </div>
             </div>
 
@@ -988,9 +988,9 @@
                     <p>The original KOTOR map ports were duel-sized environments. My goal is to take those same iconic locations and make them <em>bigger, more detailed, and properly balanced</em> for 20+ player matches — including objectives, better navigation, improved geometry, and expanded playable areas.</p>
                     <p><strong>Current maps in active development:</strong></p>
                     <ul class="faq-steps">
-                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_korribanacademy</strong> — Expanding the Korriban Sith Academy into a full multi-room Siege map.</span></li>
-                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_peragus</strong> — Peragus Mining Facility from KOTOR 2, reworked for large-scale combat.</span></li>
-                        <li><span class="faq-step-badge">🔧</span><span><strong>mb2_daviks_estate</strong> — Davik's Estate from the original KOTOR, expanded with objectives.</span></li>
+                        <li><span class="faq-step-badge">•</span><span><strong>mb2_korribanacademy</strong> — Expanding the Korriban Sith Academy into a full multi-room Siege map.</span></li>
+                        <li><span class="faq-step-badge">•</span><span><strong>mb2_peragus</strong> — Peragus Mining Facility from KOTOR 2, reworked for large-scale combat.</span></li>
+                        <li><span class="faq-step-badge">•</span><span><strong>mb2_daviks_estate</strong> — Davik's Estate from the original KOTOR, expanded with objectives.</span></li>
                     </ul>
                     <p>More maps from the KOTOR universe may be added in the future as this project grows. Follow the Discord for updates.</p>
                 </div>
@@ -1161,7 +1161,7 @@
                 header.style.fontSize = '1.2rem';
                 header.style.letterSpacing = '1px';
                 header.style.textTransform = 'uppercase';
-                header.innerHTML = isHighlighted ? `✨ ${title}` : title;
+                header.innerHTML = title;
                 section.appendChild(header);
 
                 const ul = document.createElement('ul');
@@ -1304,7 +1304,7 @@
                     const warningDiv = document.createElement('div');
                     warningDiv.className = 'error-message';
                     warningDiv.style.cssText = 'background:rgba(243,156,18,0.1);border-color:rgba(243,156,18,0.3);color:var(--primary);margin-bottom:20px;';
-                    warningDiv.innerHTML = `⚠️ Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
+                    warningDiv.innerHTML = `Live sync failed (${errorMessage}). Showing cached files from <strong>${lastSync}</strong>.`;
                     fileSections.insertBefore(warningDiv, fileSections.firstChild);
                 } else {
                     fileSections.innerHTML = `<div class="error-message">
