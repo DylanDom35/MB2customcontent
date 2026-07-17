@@ -53,57 +53,24 @@ english.SelectDirLabel3=The installer needs to place files in your MBII folder.%
 english.SelectDirBrowseLabel=To continue, click Next. If you would like to select a different MBII folder, click Browse.
 
 [Files]
-; KOTOR 2 Asset Packs
-Source: "MBII\zzz_kotor2_assets_part1.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_assets_part2.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_assets_part3.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_assets_part4.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_assets_part5.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_bsps.pk3";         DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_custom.pk3";        DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_entities.pk3";      DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor_siege_fix.pk3";      DestDir: "{app}"; Flags: ignoreversion
-; Maps
+; Consolidated Asset Packs
+Source: "MBII\acrow_assets.pk3";             DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzz_kotor2_assets.pk3";        DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_ultimate.pk3";      DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_ctf_maps.pk3";           DestDir: "{app}"; Flags: ignoreversion
+; Individual Maps
+Source: "MBII\acrow_maps.pk3";               DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_boonta_eve.pk3";           DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_corellia_platform.pk3";    DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_ilumcaverns.pk3";          DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\mb2_korribanacademy.pk3";      DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\mb2_peragus.pk3";              DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_mb2_daviks_estate.pk3";    DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\mb2_sulon.pk3";               DestDir: "{app}"; Flags: ignoreversion
-; Sky + Legend packs
+Source: "MBII\zzz_mb2_daviks_estate.pk3";    DestDir: "{app}"; Flags: ignoreversion
+; Sky, Legends & Bots
 Source: "MBII\TELOSSKY.pk3";                  DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\z_MBLegends.pk3";               DestDir: "{app}"; Flags: ignoreversion
-; Acrowe Ultimate Override Pack (character buffs, map edits, server content)
-Source: "MBII\zzzz_acrow_ultimate_part1.pk3";       DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzzz_acrow_ultimate_part2.pk3";       DestDir: "{app}"; Flags: ignoreversion
-
-
-; Acrow CTF Map Packs
-Source: "MBII\acrow_pack_antalus_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_bloodmine.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_korriban.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_mazearena.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_CTF_Nar_Kreeta.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_yavin.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF_Fire_effects.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF_music.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_icm_ctf2.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ilam_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_sjc_mygeeto.pk3"; DestDir: "{app}"; Flags: ignoreversion
-
-
-; Acrow CTF Map Packs
-Source: "MBII\acrow_pack_antalus_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_bloodmine.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_korriban.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_mazearena.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_CTF_Nar_Kreeta.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ctf_yavin.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF_Fire_effects.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_HR_CTF_music.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_icm_ctf2.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_ilam_ctf.pk3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_sjc_mygeeto.pk3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_bots.pk3";          DestDir: "{app}"; Flags: ignoreversion
 
 [Code]
 
