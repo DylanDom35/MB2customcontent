@@ -68,7 +68,6 @@ Source: "MBII\mb2_peragus.pk3";              DestDir: "{app}"; Flags: ignorevers
 Source: "MBII\mb2_sulon.pk3";               DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\zzz_mb2_daviks_estate.pk3";    DestDir: "{app}"; Flags: ignoreversion
 ; Sky, Legends & Bots
-Source: "MBII\TELOSSKY.pk3";                  DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\z_MBLegends.pk3";               DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\zzzz_acrow_bots.pk3";          DestDir: "{app}"; Flags: ignoreversion
 
