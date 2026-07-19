@@ -25,60 +25,43 @@ DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputBaseFilename=AcroweCave_Setup
 SetupIconFile=
-Compression=lzma2/ultra64
-SolidCompression=yes
+Compression=lzma/fast
+SolidCompression=no
 WizardStyle=modern
-WizardResizable=no
 DisableWelcomePage=no
-LicenseFile=
-UninstallDisplayIcon=
-; No uninstall needed - we're just placing PK3 files
 Uninstallable=no
 CreateUninstallRegKey=no
-;; Visual
-WizardImageFile=
-WizardSmallImageFile=
-; Banner color approximation via compiler directives only — style set in Pascal
-BackColor=$0F141E
-BackColor2=$1B263B
-BackColorDirection=toptobottom
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [CustomMessages]
 english.WelcomeLabel1=Welcome to Acrowe's Cave Installer
-english.WelcomeLabel2=This wizard will install Acrowe's Cave custom content for Movie Battles II v1.2.%n%n  MAPS (KOTOR / KOTOR 2):%n  - mb2_korribanacademy%n  - mb2_peragus%n  - mb2_daviks_estate%n  - mb2_sulon%n  - KOTOR 2 Asset Packs%n%n  LEGENDS BALANCE PACK:%n  - z_MBLegends.pk3  (custom character overrides)%n  - zzzz_acrow_ultimate.pk3  (map edits + server content)%n%nClick Next to continue.
-english.SelectDirLabel3=The installer needs to place files in your MBII folder.%n%nSteam users: ...%steamapps%\common\Jedi Academy\GameData\MBII%nGOG users: C:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII%n%nIf the path below is wrong, click Browse and navigate to your MBII folder.
+english.WelcomeLabel2=This wizard will install Acrowe's Cave custom content for Movie Battles II v1.2.%n%n  NEW SIEGE EXPANSION MAPS:%n  - naboo_sanctuary (Naboo Crystal Sanctuary)%n  - mos_kreetle (Tatooine Mos Kreetle)%n  - taris_hangar (Taris Hangar T-31)%n%n  CUSTOM MAPS & ASSETS:%n  - mb2_korribanacademy%n  - mb2_peragus%n  - mb2_daviks_estate%n  - mb2_sulon%n  - KOTOR / KOTOR 2 Map & Asset Packs%n  - CTF Map Pack%n%n  LEGENDS BALANCE PACK & BOTS:%n  - z_MBLegends.pk3  (Luke Skywalker & Darth Nihilus updates)%n  - zzzz_acrow_ultimate.pk3%n  - zzzzz_acrow_bots.pk3%n%nClick Next to continue.
+english.SelectDirLabel3=The installer needs to place files in your MBII folder.%n%nSteam users: ...\steamapps\common\Jedi Academy\GameData\MBII%nGOG users: C:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII%n%nIf the path below is wrong, click Browse and navigate to your MBII folder.
 english.SelectDirBrowseLabel=To continue, click Next. If you would like to select a different MBII folder, click Browse.
 
 [Files]
-; Consolidated Asset Packs
-Source: "MBII\acrow_assets.pk3";             DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_kotor2_assets.pk3";        DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzzz_acrow_ultimate.pk3";      DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_ctf_maps.pk3";           DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\acrow_pack_siege_expansion.pk3";           DestDir: "{app}"; Flags: ignoreversion
+; Core Map & Siege Expansion Packs
+Source: "MBII\acrow_pack_siege_expansion.pk3";   DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzz_kotor2_assets.pk3";            DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_ultimate.pk3";          DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_ctf_maps.pk3";               DestDir: "{app}"; Flags: ignoreversion
 ; Individual Maps
-Source: "MBII\acrow_maps.pk3";               DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_boonta_eve.pk3";           DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_corellia_platform.pk3";    DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_ilumcaverns.pk3";          DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_korribanacademy.pk3";      DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_peragus.pk3";              DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\mb2_sulon.pk3";               DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzz_mb2_daviks_estate.pk3";    DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_maps.pk3";                   DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_boonta_eve.pk3";               DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_corellia_platform.pk3";        DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_ilumcaverns.pk3";              DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_korribanacademy.pk3";          DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_peragus.pk3";                  DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\mb2_sulon.pk3";                   DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzz_mb2_daviks_estate.pk3";        DestDir: "{app}"; Flags: ignoreversion
 ; Sky, Legends & Bots
-Source: "MBII\z_MBLegends.pk3";               DestDir: "{app}"; Flags: ignoreversion
-Source: "MBII\zzzz_acrow_bots.pk3";          DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\z_MBLegends.pk3";                   DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzz_acrow_bots.pk3";              DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\zzzzz_acrow_bots.pk3";             DestDir: "{app}"; Flags: ignoreversion
 
 [Code]
-
-
-// -------------------------------------------------------
-// Auto-detect the MBII installation directory
-// Priority: Steam > GOG > Manual
-// -------------------------------------------------------
 
 function GetSteamMBIIDir(): String;
 var
@@ -86,14 +69,12 @@ var
   Candidate: String;
 begin
   Result := '';
-  // Try registry for Steam install path
   if RegQueryStringValue(HKLM, 'SOFTWARE\WOW6432Node\Valve\Steam', 'InstallPath', SteamPath) or
      RegQueryStringValue(HKCU, 'SOFTWARE\Valve\Steam', 'SteamPath', SteamPath) then
   begin
     Candidate := SteamPath + '\steamapps\common\Jedi Academy\GameData\MBII';
     if DirExists(Candidate) then
       Result := Candidate;
-    // Try common secondary library
     if Result = '' then begin
       Candidate := SteamPath + '\steam\steamapps\common\Jedi Academy\GameData\MBII';
       if DirExists(Candidate) then
@@ -107,7 +88,6 @@ var
   Candidate: String;
 begin
   Result := '';
-  // Common GOG install locations
   Candidate := 'C:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII';
   if DirExists(Candidate) then begin Result := Candidate; Exit; end;
   Candidate := 'D:\GOG Games\Star Wars Jedi Knight - Jedi Academy\GameData\MBII';
@@ -126,13 +106,9 @@ begin
   Found := GetGOGMBIIDir();
   if Found <> '' then begin Result := Found; Exit; end;
 
-  // Fallback default
   Result := 'C:\Program Files (x86)\Steam\steamapps\common\Jedi Academy\GameData\MBII';
 end;
 
-// -------------------------------------------------------
-// Validate the selected directory actually looks like MBII
-// -------------------------------------------------------
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
   SelDir: String;
@@ -142,7 +118,6 @@ begin
   if CurPageID = wpSelectDir then
   begin
     SelDir := WizardDirValue();
-    // Warn if the path doesn't end with \MBII (case-insensitive)
     if CompareText(ExtractFileName(SelDir), 'MBII') <> 0 then
     begin
       Msg := 'The selected folder does not appear to be an MBII directory.' + #13#10 +
