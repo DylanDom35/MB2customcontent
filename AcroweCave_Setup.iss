@@ -58,6 +58,7 @@ Source: "MBII\acrow_assets.pk3";             DestDir: "{app}"; Flags: ignorevers
 Source: "MBII\zzz_kotor2_assets.pk3";        DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\zzzz_acrow_ultimate.pk3";      DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\acrow_ctf_maps.pk3";           DestDir: "{app}"; Flags: ignoreversion
+Source: "MBII\acrow_pack_siege_expansion.pk3";           DestDir: "{app}"; Flags: ignoreversion
 ; Individual Maps
 Source: "MBII\acrow_maps.pk3";               DestDir: "{app}"; Flags: ignoreversion
 Source: "MBII\mb2_boonta_eve.pk3";           DestDir: "{app}"; Flags: ignoreversion
